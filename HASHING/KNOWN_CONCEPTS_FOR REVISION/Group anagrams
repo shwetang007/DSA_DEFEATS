@@ -1,0 +1,35 @@
+// THIS IS LEETCODE MEDIUM LEVEL PROBLEM OFTEN ASKED IN INTERVIEWS AND ONE OF THE MIND BEMDING AND CHALLENGING QUESTION THAT BEGINNERS ALWAYS GET WORONG.
+// THE KEY HERE IS STRING THE ITEMS IN MAPS AND SORTING THEM IF YES WE GET TO THE MAP AND STORE IT IF NOT CREATE A NEW FOLDER 
+// PERTANING TO THE ISSUE , THE ACTUAL CODE IS SMALLER YET VERY HARD WORDS THAT CAN CURL YOU UP.
+
+// HERE GOES 
+
+import java.util.*;
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        // 1. Create the filing cabinet: Key = sorted word, Value = list of original words
+        HashMap<String, List<String>> map = new HashMap<>();
+
+        // 2. Loop through every word in the input array
+        for (String word : strs) {
+            // 3. Convert word to a character array so we can sort it
+            char[] chars = word.toCharArray();
+            Arrays.sort(chars);
+            
+            // 4. Turn the sorted characters back into a String (our "signature")
+            String key = new String(chars);
+
+            // 5. If this folder doesn't exist yet, create an empty list for it
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<>());
+            }
+
+            // 6. Add the original word into its matching folder
+            map.get(key).add(word);
+        }
+
+        // 7. Return just the lists (the folders), ignoring the keys
+        return new ArrayList<>(map.values());
+    }
+}
